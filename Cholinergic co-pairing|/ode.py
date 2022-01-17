@@ -9,9 +9,7 @@ import E
 # Calcium dynamics:
 def dCadt(Ca, i):
     alpha = 0.1
-   # alpha2 = 0.0056 # for train pulses of glutamate and ACh
     alpha2 = 0.006
-   # alpha2 = 0.0058
     tca = 12
     return (-alpha * alpha2 * i - Ca / tca)
 
@@ -47,13 +45,12 @@ def periodic_rect(t,init,tau,T):
 
 
 # DEFINE PARAMETERS
-theta_d = 0.31 # 0.28
+theta_d = 0.31 
 tau_d = 900
 theta_p = 0.34
 tau_p = 900
-maxPot = 0.0675 # 0.0761
+maxPot = 0.0675 
 maxDep = 0.0375
-#maxDep = 0.0380
 
 
 r = 0.0040
@@ -86,7 +83,7 @@ def noise_generation(T, dt):
 
     # White noise O-cell
     mean = 0
-    std = 1.5
+    std = 1.1
     rand_O = np.random.normal(mean, std, size=num_samples)
     noise_O = dt ** 0.5 * rand_O
     
@@ -120,8 +117,7 @@ def body_new(state, arg):
     ia7 = 3 * ra7 * (V_O - OLM.nAChR['E'])
 
     # Neuron dynamics
-    V_O_new = V_O + dt * OLM.dvdt(V_O, h_O, m_O, n_O, p, hf, hs, ia7, -260) 
-   # V_O_new = V_O + dt * OLM.dvdt(V_O, h_O, m_O, n_O, p, hf, hs, ia7, -260) 
+    V_O_new = V_O + dt * OLM.dvdt(V_O, h_O, m_O, n_O, p, hf, hs, ia7, -260)  
 
     # CICR mechanism
     k = Ca_a7 / (Ca_a7 + 0.2e-3)
@@ -174,8 +170,7 @@ def body_new(state, arg):
     g_new = g + dt * dWdt(Ca, g)
 
     # Membrane Potential
-    V_Ed_new = V_Ed + dt * (- il - isyn_E) / 100 
-  #  V_Ed_new = V_Ed + dt * (- il - isyn_E) / 100 
+    V_Ed_new = V_Ed + dt * (- il - isyn_E) / 100 + noise_Ed
     
     state = (V_O_new, m_O_new, h_O_new, n_O_new, p_new, hf_new, hs_new, ra7_new, 
              Ca_a7_new, Ca_is_new, GABA_O, V_I_new, r_G_new, r_A_new, m_I_new, h_I_new, n_I_new, 
