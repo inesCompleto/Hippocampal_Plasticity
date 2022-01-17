@@ -16,9 +16,8 @@ from ode import body_new, noise_generation, periodic_rect
 
 # Define time step and total time of simulation
 tmin = 0
-#tmax = 2400e3
-tmax = 1800
-#tmax = 400e3
+tmax = 2400e3
+#tmax = 1800
 dt = 0.02
 steps = (tmax - tmin) / dt  # number of steps
 T = np.linspace(tmin, tmax, int(steps))  # time vector
@@ -26,7 +25,7 @@ T_min = T * 1e-3 / 60 # time in minutes (for plotting)
 
 # Parameters for neurotransmitters
 ACh_par ={'init' : 900, 'dur' : 5, 'per' : 60e3}
-Glu_par = {'init': 910, 'dur': 5,'per': 60e3}
+Glu_par = {'init': 1000, 'dur': 5,'per': 60e3}
 
 # Fast interneuron initial values
 VI = np.zeros(len(T))
@@ -81,7 +80,7 @@ Glu = periodic_rect(T,Glu_par['init'],Glu_par['dur'], Glu_par['per'])
 
 
 
-file = open('EPSC_5mints_v1.txt','w')
+file = open('EPSC_v1.txt','w')
 
 for i,time in enumerate(T):
     
@@ -117,43 +116,11 @@ file.close()
 
 
 plt.figure()
-plt.plot(T, ACh)
-plt.plot(T, Glu)
-
-plt.figure()
-plt.plot(T, VO)
-plt.xlabel('Vo')
-
-plt.figure()
-plt.plot(T, VI)
-plt.xlabel('Vi')
-
-plt.figure()
-plt.plot(T, GABAO)
-plt.xlabel('GABAo')
-
-plt.figure()
-plt.plot(T, Ca_Ed)
-plt.xlabel('Ca_Ed')
-
-plt.figure()
-plt.plot(T, gA)
-plt.xlabel('gA')
-
-
-plt.figure()
 from plots import plot_EPSC, Read_Column_One_File
-EPSC_x = Read_Column_One_File('EPSC_5mints_v1.txt')
-files_8min = ['EPSC_5mints_v1.txt']
+EPSC_x = Read_Column_One_File('EPSC_v1.txt')
+files_8min = ['EPSC_v1.txt']
 files_5min = []
 plot_EPSC(EPSC_x, files_5min, files_8min)
-
-#plt.plot(T, VO)
-#fig, ax1 = plt.subplots()
-#ax1.set_xlabel('time (s)')
-#ax1.plot(T, VI)
-#ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-#ax2.plot(T, GABAO, color='red')
 
 
 plt.show()
