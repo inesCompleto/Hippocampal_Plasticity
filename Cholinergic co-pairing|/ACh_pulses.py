@@ -1,3 +1,8 @@
+"""
+Example of paired pulses with a frequency of 10 Hz
+"""
+
+
 import sk_dsp_comm.sigsys as ss
 import scipy.signal as signal
 import numpy as np
