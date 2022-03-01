@@ -10,3 +10,6 @@ The files in the 'Cholinergic co-pairing' folder are used to study the cholinerg
 - 'run_timing' simulates changes in the co-pairing period of single pulses and respective plasticity induction (for no-noise simulations comment line ??? instead of ??? in 'ode.py'). See 'ACh_pulses.py' for examples on how to simulate paired periodic pulses (such as doublets).
 
 The files in the 'Disinhibition co-pairing' folder are used to study the disinhibitory mechanisms by which disinhibition of the CA1 pyr cell dendritic compartment potentiates the SC-CA1 synapse when paired with SC stimulation.
+- 'short_long_DisPeriod.py' runs a simulation for a short (4 mints) and long (8mints) disinhibition period. It calculates all the variables for the short and long disinhibition period and it saves the corresponding EPSC in a file named 'EPSC_8mint_v#.txt' and 'EPSC_4mint_v#.txt'. Comment line ??? instead of ?? for non-noisy simulations.
+- 'plots.py' imports all the 'EPSC_8mint_v#.txt' and 'EPSC_4mint_v#.txt' that the user specifies, and calculates the average and standard deviation of the EPSC of the simulations considered.
+- 'areas_ratio.py' 
