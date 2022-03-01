@@ -1,6 +1,5 @@
 import numpy as np
 from math import exp
-#from neuro_trans import stim
 from scipy import integrate
 
 
