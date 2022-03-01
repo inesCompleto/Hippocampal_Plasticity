@@ -235,7 +235,7 @@ while i < len(T)-1:
         
         file_s.write("%s %s\n" % (EPSC_x_s[j], EPSC_y_s[j]))
         file_l.write("%s %s\n" % (EPSC_x_s[j], EPSC_y_l[j]))
-        print(j)
+        print("%s out of 40 mints" % (j+1))
         j+=1  
 
     i+=1
