@@ -24,7 +24,6 @@ plt.figure()
 plt.plot(t,x)
 plt.plot(t,x)
 plt.grid()
-#xlim([-5,5])
 plt.xlabel(r'Time (s)')
 plt.ylabel(r'$x_2(t)$ and $x_2^2(t)$');
 
@@ -32,7 +31,6 @@ plt.ylabel(r'$x_2(t)$ and $x_2^2(t)$');
 
 x2 = periodic_rect(t,0,405,700)
 x1 = x* x2
-#ss.rect(t-405/2,405)
 
 plt.figure()
 plt.subplot(211)
