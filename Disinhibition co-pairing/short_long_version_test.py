@@ -1,12 +1,5 @@
-"""
-
-
-"""
-
-
 import numpy as np
 from math import exp
-#from neuro_trans import stim
 
 # ----------  PARAMETERS  ---------- #
 #Synaptic Currents
@@ -19,7 +12,6 @@ AMPA = {
 
 NMDA = {
         'g' : 25,
-   #'g' : 5,
         'Mg' : 1,    #Mg concentration in mM
         'kd0': 3.57, #
         'E' : 0,
@@ -28,7 +20,6 @@ NMDA = {
         }
 
 GABA_A = {
-       # 'g' : 0.2,
         'g' : 7,
         'E' : -80,
         'a' : 5,
@@ -42,7 +33,6 @@ V_leak = -68 #leak reversal potential
 #Calcium Dynamics
 alpha = 0.1 #fraction of NMDA current composed of Ca ions
 alpha2 = 0.045
-#alpha2 = 1
 tca = 12     #decay constant in msec
 
 #Synaptic Plasticity
@@ -50,18 +40,15 @@ theta_d = 0.31    #depression threshold in mM
 tau_d = 900     # 
 theta_p = 0.34  #potentiation threshold in mM
 tau_p = 900
-#maxDep = 0.0375 
-#maxPot=0.0699
+maxDep = 0.0375 
+maxPot=0.0699
 
-maxDep = 0.0382
-maxPot = 0.070777
-
-P1 = 1.5e-6 #1.5e-6
+P1 = 1.5e-6 
 P2 = P1*1e-4
 P3=13
 P4 = 1
 r=0.0040
-g0 = AMPA['g'] #initial value of gA in mS/cm2
+g0 = AMPA['g'] #initial value of gA
 
 
 
@@ -113,15 +100,11 @@ def drdt(a,b,r,NeuroTrans):
 
 # ----------  VARIABLES  ---------- #
 tmin = 0.0
-#tmax = 2.7e6
-tmax=1.8e6
-#tmax=900e3
-#tmax=300e3
-#dt = 0.02
+tmax = 2.7e6
 dt=0.02
 steps = ((tmax - tmin)/dt) // 1
 T = np.linspace(tmin, tmax, int(steps)) #total time in msec
-T_min = [x*1e-3/60 for x in T]     #total time in min
+T_min = [x*1e-3/60 for x in T]     #total time in min (for plotting)
 
 Glu = np.zeros(len(T))
 
@@ -131,8 +114,7 @@ s_l=0
 rGb_l=0
 s_s=0
 r_A_s = 0                            #AMPAR opening gate
-#r_N_s = 0                            #NMDAR opening gate
-r_N_s = 0
+r_N_s = 0                            #NMDAR opening gate
 r_G_s = 0                            #(GABA_A)R opening gate              
 g_s = np.zeros(len(T))                     #AMPAR maximal conductance
 g_s[0] = AMPA['g']
@@ -157,30 +139,19 @@ j=0
 
 #White Noise
 mean = 0
-#std = 10
 std=40
 num_samples = len(T)
 rand = np.random.normal(mean,std,size=num_samples)
-#noise= np.random.normal(mean,std,size=num_samples)
 sigma=10
 noise = sigma * dt **0.5 * rand
 
 t_dis_s=546e3
 t_dis_l=726e3
 
-#t_dis_s=361e3
-#t_dis_l=600e3
-
 
 #Opening files to write on
 file_s = open('EPSC_5mint.txt','w')
 file_l = open('EPSC_8mint.txt','w')
-
-#file_s = open('Ca_5mints.txt','w')
-#file_2s = open('gA_5mints.txt','w')
-#file_l = open('Ca_8mints.text', 'w')
-#file_2l = open('gA_8mints.text', 'w')
-
 
 # ----------  INTEGRATE VARIABLES  ---------- #
 while i < len(T)-1:
@@ -189,7 +160,6 @@ while i < len(T)-1:
     if T[i] > ( GABA_par['init'] + GABA_par['dur'] + period*GABA_par['k'] ) :
         GABA_par['k'] += 1
     if ( GABA_par['init'] + 60e3*GABA_par['k']) < T[i] < (GABA_par['init'] + GABA_par['dur'] + 60e3*GABA_par['k']) and (T[i]<246e3 or T[i]>t_dis_s) :
-    #if ( GABA_par['init'] + 60e3*GABA_par['k']) < T[i] < (GABA_par['init'] + GABA_par['dur'] + 60e3*GABA_par['k']) and (T[i]<10e3 or T[i]>t_dis_s) :
         GABA_s = GABA_par['max']
     else:
         GABA_s = 0
@@ -266,30 +236,17 @@ while i < len(T)-1:
         file_s.write("%s %s\n" % (EPSC_x_s[j], EPSC_y_s[j]))
         file_l.write("%s %s\n" % (EPSC_x_s[j], EPSC_y_l[j]))
         print(j)
-        j+=1
-
-#    file_s.write("%s %s\n" % (T_min[i], Ca_s[i])) 
-#    file_2s.write("%s\n" % (g_s[i]))      
-#    file_l.write("%s %s\n" % (T_min[i], Ca_l[i]))
-#    file_2l.write("%s\n" % (g_l[i]))
-    
-   
+        j+=1  
 
     i+=1
 
 file_s.close()
 file_l.close()
-#file_2s.close()
-#file_2l.close()
-
 
 # ----------  PLOTS  ---------- #
-
 import matplotlib.pyplot as plt
 plt.figure()
 plt.plot(EPSC_x_s, EPSC_y_s)
 plt.plot(EPSC_x_s, EPSC_y_l)
-
-
 
 plt.show()
