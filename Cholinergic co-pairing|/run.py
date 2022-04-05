@@ -17,7 +17,6 @@ from ode import body_new, noise_generation, periodic_rect
 # Define time step and total time of simulation
 tmin = 0
 tmax = 2400e3
-#tmax = 1800
 dt = 0.02
 steps = (tmax - tmin) / dt  # number of steps
 T = np.linspace(tmin, tmax, int(steps))  # time vector
@@ -85,7 +84,7 @@ file = open('EPSC_v1.txt','w')
 for i,time in enumerate(T):
     
     # Define co-pairing period  
-   # if (530e3 + ACh_par['init'])>time or time>(970e3 + ACh_par['init'] ) : ACh[i] = 0 #tdis = 8mints
+    if (530e3 + ACh_par['init'])>time or time>(970e3 + ACh_par['init'] ) : ACh[i] = 0 #tdis = 8mints
    # if (530e3 + ACh_par['init'])>time or time>(790e3+ ACh_par['init']) : ACh[i] = 0 #tdis = 5mints
    
     
