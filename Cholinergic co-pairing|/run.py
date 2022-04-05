@@ -115,15 +115,4 @@ for i,time in enumerate(T):
 file.close()
 
 
-plt.figure()
-from plots import plot_EPSC, Read_Column_One_File
-EPSC_x = Read_Column_One_File('EPSC_v1.txt')
-files_8min = ['EPSC_v1.txt']
-files_5min = []
-plot_EPSC(EPSC_x, files_5min, files_8min)
-
-
-plt.show()
-
-
 
