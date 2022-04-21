@@ -25,9 +25,9 @@ ACh_dur = 5
 init_max = 250
 init_min=-30  # init and j: time difference between ACh and Glu
 
-#steps_init_time = ((init_max - init_min)/3) // 1 # number of steps
+steps_init_time = ((init_max - init_min)/3) // 1 # number of steps
 #steps_init_time = ((init_max - init_min)/10) // 1 # number of steps
-steps_init_time = ((init_max - init_min)/20) // 1
+#steps_init_time = ((init_max - init_min)/20) // 1
 init_time = np.linspace(init_min, init_max, int(steps_init_time)) # time vector
 
 
