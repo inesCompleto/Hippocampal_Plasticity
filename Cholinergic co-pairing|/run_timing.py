@@ -77,7 +77,7 @@ for j in init_time:
     g = E.AMPA['g']
 
     # Neurotransmitter
-    ACh_init = 900 # start neurotransmitter admistration at 800 msec. By doing so we make sure all variables are at equilibrium.
+    ACh_init = 900 # start neurotransmitter admistration at 900 msec. By doing so we make sure all variables are at equilibrium.
     Glu_init = j + 900
 
     x0 = (V_O, m_O, h_O, n_O, p, hf, hs, ra7, Ca_a7, Ca_is, GABA_O, 
