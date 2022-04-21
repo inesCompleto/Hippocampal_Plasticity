@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 21 11:31:06 2021
 
-@author: ines
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -23,7 +17,7 @@ T = np.linspace(tmin, tmax, int(steps))  # time vector
 T_min = T * 1e-3 / 60 # time in minutes (for plotting)
 
 # Parameters for neurotransmitters
-ACh_par ={'init' : 900, 'dur' : 5, 'per' : 60e3}
+ACh_par ={'init' : 900, 'dur' : 5, 'per' : 60e3} # start neurotransmitter admistration at 900 msec. By doing so we make sure all variables are at equilibrium.
 Glu_par = {'init': 1000, 'dur': 5,'per': 60e3}
 
 # Fast interneuron initial values
